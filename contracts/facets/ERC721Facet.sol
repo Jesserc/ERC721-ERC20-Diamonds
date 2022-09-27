@@ -23,11 +23,11 @@ contract ERC721 {
                          METADATA STORAGE/LOGIC
     //////////////////////////////////////////////////////////////*/
 
-  function name() public view returns (string memory) {
+  function nName() public view returns (string memory) {
     return ns.nName;
   }
 
-  function symbol() public view returns (string memory) {
+  function nSymbol() public view returns (string memory) {
     return ns.nSymbol;
   }
 
@@ -80,11 +80,19 @@ contract ERC721 {
     emit ApprovalForAll(msg.sender, operator, approved);
   }
 
-  function transferFrom(
+  function nTransferFrom(
     address from,
     address to,
     uint256 id
   ) public {
+    transferFrom(from, to, id);
+  }
+
+  function transferFrom(
+    address from,
+    address to,
+    uint256 id
+  ) internal {
     require(from == ns._ownerOf[id], "WRONG_FROM");
 
     require(to != address(0), "INVALID_RECIPIENT");
@@ -111,16 +119,9 @@ contract ERC721 {
     emit Transfer(from, to, id);
   }
 
-  function supportsInterface(bytes4 interfaceId) public pure returns (bool) {
-    return
-      interfaceId == 0x01ffc9a7 || // ERC165 Interface ID for ERC165
-      interfaceId == 0x80ac58cd || // ERC165 Interface ID for ERC721
-      interfaceId == 0x5b5e139f; // ERC165 Interface ID for ERC721Metadata
+  function nMint(address to, uint256 id) public {
+    _mint(to, id);
   }
-
-  /*//////////////////////////////////////////////////////////////
-                        INTERNAL MINT/BURN LOGIC
-    //////////////////////////////////////////////////////////////*/
 
   function _mint(address to, uint256 id) internal {
     require(to != address(0), "INVALID_RECIPIENT");
