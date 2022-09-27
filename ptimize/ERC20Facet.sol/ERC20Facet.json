@@ -1,0 +1,33 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "contracts/facets/ERC20Facet.sol",
+    "id": 347,
+    "exportedSymbols": {},
+    "nodeType": "SourceUnit",
+    "src": "32:24:3",
+    "nodes": [
+      {
+        "id": 346,
+        "nodeType": "PragmaDirective",
+        "src": "32:23:3",
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 3
+}
