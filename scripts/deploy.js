@@ -30,7 +30,12 @@ async function deployDiamond() {
   // deploy facets
   console.log("");
   console.log("Deploying facets");
-  const FacetNames = ["DiamondLoupeFacet", "OwnershipFacet", "ERC721", "ERC20"];
+  const FacetNames = [
+    "DiamondLoupeFacet",
+    "OwnershipFacet",
+    "ERC20Facet",
+    "ERC721Facet",
+  ];
   const cut = [];
   for (const FacetName of FacetNames) {
     const Facet = await ethers.getContractFactory(FacetName);
@@ -59,6 +64,17 @@ async function deployDiamond() {
     throw Error(`Diamond upgrade failed: ${tx.hash}`);
   }
   console.log("Completed diamond cut");
+
+  //Interactions
+  const erc20 = await ethers.getContractAt("ERC20", diamond.address);
+  const erc20name = await erc20.name();
+  console.log(erc20name);
+  const erc721 = await ethers.getContractAt("ERC721", diamond.address);
+  const erc721name = await erc721.nName();
+  const erc721symbol = await erc721.nSymbol();
+  console.log(erc721name);
+  console.log(erc721symbol);
+
   return diamond.address;
 }
 

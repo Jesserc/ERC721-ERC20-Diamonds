@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 import { LibERC } from "../libraries/LibERC.sol";
 
-contract ERC20 {
+contract ERC20Facet {
   LibERC.AppStorage internal ap;
 
   //Events
@@ -25,12 +25,12 @@ contract ERC20 {
 
   } */
 
-  function name() public view returns (string memory) {
-    return ap.tName;
+  function name() public pure returns (string memory) {
+    return "Diamond Token";
   }
 
-  function symbol() public view returns (string memory) {
-    return ap.tSymbol;
+  function symbol() public pure returns (string memory) {
+    return unicode"💎";
   }
 
   function approve(address spender, uint256 amount) public returns (bool) {
@@ -78,9 +78,9 @@ contract ERC20 {
     return true;
   }
 
-  /*//////////////////////////////////////////////////////////////
-                        INTERNAL MINT/BURN LOGIC
-    //////////////////////////////////////////////////////////////*/
+  function tMint(address to, uint256 amount) public {
+    _mint(to, amount);
+  }
 
   function _mint(address to, uint256 amount) internal {
     ap.totalSupply += amount;

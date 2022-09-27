@@ -15,8 +15,6 @@ library LibERC {
     mapping(address => uint256) nonces;
     //ERC20 facet storage ends here
 
-    string nName;
-    string nSymbol;
     mapping(uint256 => address) _ownerOf;
     mapping(address => uint256) _balanceOf;
     mapping(uint256 => string) _tokenURIs;

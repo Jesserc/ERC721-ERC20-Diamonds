@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import { LibERC } from "../libraries/LibERC.sol";
 
-contract ERC721 {
+contract ERC721Facet {
   LibERC.AppStorage ns;
   event Transfer(address indexed from, address indexed to, uint256 indexed id);
 
@@ -23,12 +23,12 @@ contract ERC721 {
                          METADATA STORAGE/LOGIC
     //////////////////////////////////////////////////////////////*/
 
-  function nName() public view returns (string memory) {
-    return ns.nName;
+  function nName() public pure returns (string memory) {
+    return "Diamond NFT";
   }
 
-  function nSymbol() public view returns (string memory) {
-    return ns.nSymbol;
+  function nSymbol() public pure returns (string memory) {
+    return unicode"💎";
   }
 
   function tokenURI(uint256 tokenId) public view returns (string memory) {
@@ -122,6 +122,17 @@ contract ERC721 {
   function nMint(address to, uint256 id) public {
     _mint(to, id);
   }
+
+  // function supportsInterface(bytes4 interfaceId) public pure returns (bool) {
+  //   return
+  //     interfaceId == 0x01ffc9a7 || // ERC165 Interface ID for ERC165
+  //     interfaceId == 0x80ac58cd || // ERC165 Interface ID for ERC721
+  //     interfaceId == 0x5b5e139f; // ERC165 Interface ID for ERC721Metadata
+  // }
+
+  /*//////////////////////////////////////////////////////////////
+                        INTERNAL MINT/BURN LOGIC
+    //////////////////////////////////////////////////////////////*/
 
   function _mint(address to, uint256 id) internal {
     require(to != address(0), "INVALID_RECIPIENT");
